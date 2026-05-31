@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Twitter, Instagram, Linkedin } from 'lucide-react';
 import '../styles/Landing.css';
 
 // href: internal React Router path, or external URL string, or null for placeholder
@@ -26,10 +26,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { name: 'Twitter', icon: Twitter, href: '#' },
-  { name: 'Instagram', icon: Instagram, href: '#' },
-  { name: 'LinkedIn', icon: Linkedin, href: '#' },
-  { name: 'YouTube', icon: Youtube, href: '#' },
+  { name: 'Twitter / X', icon: Twitter, href: 'https://x.com/ondroppapp' },
+  { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/dropp_app?igsh=MXE5dTFyYWVmYTd1Mw==' },
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/ondropp/' },
 ];
 
 const Footer = () => {
@@ -98,7 +97,7 @@ const Footer = () => {
               </p>
             <div style={{ display: 'flex', gap: 8 }}>
               {socialLinks.map(({ name, icon: Icon, href }) => (
-                <motion.a key={name} href={href} aria-label={name}
+                <motion.a key={name} href={href} target="_blank" rel="noreferrer" aria-label={name}
                   whileHover={{ scale: 1.12, y: -2 }} whileTap={{ scale: 0.95 }}
                   style={{
                     width: 38, height: 38, borderRadius: 10,

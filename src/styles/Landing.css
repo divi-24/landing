@@ -1010,6 +1010,9 @@ body:has(.dropp-landing) {
 }
 
 .dropp-workflow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-top: clamp(90px, 11vw, 150px);
   padding-bottom: clamp(90px, 11vw, 150px);
   background:
@@ -1020,10 +1023,13 @@ body:has(.dropp-landing) {
 
 .workflow-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  place-content: center;
   gap: 16px;
+  width: min(1120px, calc(100vw - clamp(40px, 10vw, 152px)));
   max-width: 1120px;
   margin: 0 auto;
+  box-sizing: border-box;
   perspective: 1000px;
 }
 

@@ -22,7 +22,6 @@ import {
   Users,
   WandSparkles,
   X,
-  Youtube,
   Zap,
 } from 'lucide-react';
 import AudienceArchCarousel from '../components/AudienceArchCarousel';
@@ -203,10 +202,9 @@ const footerColumns = [
 ];
 
 const footerSocials = [
-  { label: 'Instagram', href: 'https://instagram.com/ondropp', Icon: Instagram },
-  { label: 'X', href: 'https://x.com/ondropp', Icon: Twitter },
-  { label: 'LinkedIn', href: 'https://linkedin.com/company/ondropp', Icon: Linkedin },
-  { label: 'YouTube', href: 'https://youtube.com/@ondropp', Icon: Youtube },
+  { label: 'Instagram', href: 'https://www.instagram.com/dropp_app?igsh=MXE5dTFyYWVmYTd1Mw==', Icon: Instagram },
+  { label: 'X', href: 'https://x.com/ondroppapp', Icon: Twitter },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/ondropp/', Icon: Linkedin },
 ];
 
 const spring = { type: 'spring', stiffness: 240, damping: 24 };
