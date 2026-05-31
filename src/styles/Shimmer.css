@@ -1,0 +1,231 @@
+/* Shimmer Effect */
+.shimmer {
+    background: linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-tertiary) 50%, var(--bg-secondary) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: var(--radius-md);
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Shimmer Components */
+.shimmer-line {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+}
+
+.shimmer-line.title {
+    height: 1.5rem;
+    width: 60%;
+    margin-bottom: 0.75rem;
+}
+
+.shimmer-line.subtitle {
+    height: 1rem;
+    width: 40%;
+}
+
+.shimmer-line.text {
+    height: 0.875rem;
+    width: 80%;
+}
+
+/* Profile Shimmer */
+.shimmer-profile-header {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.shimmer-header-top {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.shimmer-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.shimmer-info {
+    flex: 1;
+}
+
+.shimmer-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.shimmer-stat {
+    width: 80px;
+    height: 40px;
+}
+
+/* Collection Card Shimmer (Pinterest Style) */
+.shimmer-board {
+    margin-bottom: 1.5rem;
+}
+
+.shimmer-cover {
+    background: var(--bg-secondary);
+}
+
+/* Masonry Shimmer */
+.masonry-grid .shimmer-item {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 1rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+/* Creator Card Shimmer */
+.shimmer-creator-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color);
+}
+
+.shimmer-creator-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.shimmer-creator-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.shimmer-creator-stats {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.shimmer-stat-item {
+    width: 60px;
+    height: 40px;
+    border-radius: var(--radius-md);
+}
+
+.shimmer-btn {
+    width: 100px;
+    height: 40px;
+    border-radius: 9999px;
+}
+
+/* Collection Detail Shimmer */
+.shimmer-collection-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg) var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.shimmer-back-link {
+    border-radius: 4px;
+}
+
+.shimmer-creator-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+}
+
+.shimmer-avatar-lg {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.shimmer-creator-detail-info {
+    flex: 1;
+}
+
+.shimmer-follow-btn {
+    border-radius: var(--radius-lg);
+}
+
+.shimmer-collection-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.shimmer-content-area {
+    width: 100%;
+}
+
+/* Responsive Shimmer */
+@media (max-width: 768px) {
+    .shimmer-header-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .shimmer-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .shimmer-stats {
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .shimmer-creator-section {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .shimmer-profile-header {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .shimmer-avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .shimmer-stat {
+        width: 60px;
+        height: 32px;
+    }
+
+    .shimmer-creator-card {
+        padding: 1rem;
+    }
+
+    .shimmer-creator-avatar {
+        width: 48px;
+        height: 48px;
+    }
+}

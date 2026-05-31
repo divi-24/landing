@@ -1,0 +1,531 @@
+/* ─── Notifications Page ──────────────────────────────────── */
+
+.notifications-page {
+    padding: var(--spacing-md);
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.notifications-container {
+    padding: var(--spacing-md) 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+
+.notifications-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-lg);
+    gap: 1rem;
+}
+
+.notifications-title {
+    font-size: 2rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.notifications-subtitle {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    font-family: var(--font-display);
+    margin-top: 0.3rem;
+}
+
+/* ─── Filters ────────────────────────────────────────────── */
+
+.notifications-filters {
+    display: flex;
+    gap: 0.375rem;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+.filter-btn {
+    padding: 0.4375rem 1.125rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: var(--font-display);
+}
+
+.filter-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.filter-btn.active {
+    background: var(--accent-gradient);
+    color: #fff;
+    border-color: transparent;
+}
+
+/* ─── List ───────────────────────────────────────────────── */
+
+.notifications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+/* ─── Notification Card ──────────────────────────────────── */
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    /* Fixed height so every card looks the same size */
+    min-height: 82px;
+    padding: 0 1.125rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--backdrop-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+    transition: background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Left color strip via ::before */
+.notification-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    border-radius: 3px 0 0 3px;
+}
+
+/* ── Follow — blue gradient ── */
+.notif--follow::before {
+    background: var(--accent-gradient);
+}
+
+/* ── Product & Collection like — rose/red ── */
+.notif--like::before {
+    background: linear-gradient(180deg, #be123c, #f43f5e);
+}
+
+.notification-item.clickable { cursor: pointer; }
+
+.notification-item:hover {
+    background: var(--bg-secondary);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Unread tint — follow = blue, like = rose */
+.notif--follow.unread {
+    background: rgba(56, 135, 248, 0.04);
+    border-color: rgba(56, 135, 248, 0.14);
+}
+
+.notif--like.unread {
+    background: rgba(244, 63, 94, 0.03);
+    border-color: rgba(244, 63, 94, 0.14);
+}
+
+[data-theme='dark'] .notif--follow.unread { background: rgba(56, 135, 248, 0.07); }
+[data-theme='dark'] .notif--like.unread   { background: rgba(244, 63, 94, 0.06); }
+
+/* ─── Avatar ─────────────────────────────────────────────── */
+
+.notif-avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.notif-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    overflow: hidden;
+    /* fallback */
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+/* Follow → blue gradient */
+.notif--follow-avatar {
+    background: linear-gradient(135deg, #0D36C7 0%, #57A0FF 100%);
+    color: #fff;
+}
+
+/* Product & Collection like → rose/red gradient */
+.notif--like-avatar {
+    background: linear-gradient(135deg, #9f1239 0%, #fb7185 100%);
+    color: #fff;
+}
+
+/* Profile image fills the avatar circle */
+.notif-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+/* Icon inside avatar (Package / BookOpen) */
+.notif-avatar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    opacity: 0.92;
+}
+
+/* ─── Type Badge (bottom-right of avatar) ────────────────── */
+
+.notif-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-primary);
+    color: #fff;
+}
+
+.notif-badge--follow {
+    background: linear-gradient(135deg, #0D36C7, #3887F8);
+}
+
+/* Both product and collection like share the same rose badge */
+.notif-badge--like {
+    background: linear-gradient(135deg, #be123c, #f43f5e);
+}
+
+/* ─── Body ───────────────────────────────────────────────── */
+
+.notif-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.notif-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.notif-text {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.notif-username {
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--text-primary);
+}
+
+/* Entity name inline chip (product / collection title) */
+.notif-entity-ref {
+    font-weight: 700;
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-primary);
+}
+
+.notif-time {
+    font-size: 0.7375rem;
+    color: var(--text-secondary);
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+}
+
+/* ─── Type Label Pill ────────────────────────────────────── */
+
+.notif-label {
+    font-size: 0.6375rem;
+    font-weight: 700;
+    font-family: var(--font-display);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.175rem 0.5rem;
+    border-radius: 999px;
+    flex-shrink: 0;
+    line-height: 1.4;
+}
+
+.notif-label--follow {
+    background: rgba(56, 135, 248, 0.1);
+    color: #3887F8;
+}
+
+/* Both product and collection share the rose label */
+.notif-label--like {
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+}
+
+[data-theme='dark'] .notif-label--follow { background: rgba(56, 135, 248, 0.15); }
+[data-theme='dark'] .notif-label--like   { background: rgba(251, 113, 133, 0.15); color: #fb7185; }
+
+/* ─── Right Action ───────────────────────────────────────── */
+
+.notif-action {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Follow back button */
+.follow-back-btn {
+    padding: 0.4rem 0.875rem;
+    background: var(--accent-gradient);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-size: 0.775rem;
+    font-weight: 700;
+    font-family: var(--font-display);
+    cursor: pointer;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+}
+
+.follow-back-btn:hover:not(:disabled) {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.follow-back-btn:disabled { cursor: default; }
+
+.follow-back-btn.followed {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+}
+
+/* Arrow for navigable likes */
+.notif-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.notification-item:hover .notif-arrow {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    transform: translateX(2px);
+}
+
+/* ─── Unread Dot ─────────────────────────────────────────── */
+
+.notif-dot {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.notif--follow .notif-dot {
+    background: linear-gradient(135deg, #3887F8, #57A0FF);
+}
+
+.notif--like .notif-dot {
+    background: linear-gradient(135deg, #be123c, #f43f5e);
+}
+
+.notif--invite .notif-dot {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+}
+
+/* ── Invite — purple ── */
+.notif--invite::before {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+}
+
+.notif--invite.unread {
+    background: rgba(124, 58, 237, 0.04);
+    border-color: rgba(124, 58, 237, 0.14);
+}
+
+[data-theme='dark'] .notif--invite.unread { background: rgba(124, 58, 237, 0.07); }
+
+.notif--invite-avatar {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    color: #fff;
+}
+
+.notif-badge--invite {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+}
+
+.notif-label--invite {
+    background: rgba(124, 58, 237, 0.1);
+    color: #7c3aed;
+    border: 1px solid rgba(124, 58, 237, 0.15);
+}
+
+[data-theme='dark'] .notif-label--invite { background: rgba(167, 139, 250, 0.15); color: #a78bfa; }
+
+/* ─── Empty State ────────────────────────────────────────── */
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+    color: var(--text-secondary);
+}
+
+.empty-state-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-sm);
+    color: var(--text-secondary);
+}
+
+.empty-state h2 {
+    font-size: 1.3rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.375rem;
+    letter-spacing: -0.02em;
+}
+
+.empty-state p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* ─── Mark All Read ──────────────────────────────────────── */
+
+.notifications-actions {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.625rem 1.25rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: var(--font-display);
+}
+
+.action-btn:hover {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+    .notifications-page { padding: var(--spacing-sm) var(--spacing-md); }
+}
+
+@media (max-width: 768px) {
+    .notifications-page { padding: var(--spacing-sm); }
+
+    .notifications-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.875rem;
+    }
+
+    .notifications-title { font-size: 1.75rem; }
+
+    .notification-item {
+        gap: 0.75rem;
+        min-height: 74px;
+        padding: 0 0.875rem;
+    }
+
+    .notif-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9375rem;
+    }
+
+    .notif-badge {
+        width: 18px;
+        height: 18px;
+    }
+
+    .notif-text { font-size: 0.875rem; }
+}
+
+@media (max-width: 480px) {
+    .notifications-title { font-size: 1.5rem; }
+
+    .notifications-filters { width: 100%; }
+    .filter-btn { flex: 1; text-align: center; }
+
+    .notification-item {
+        gap: 0.625rem;
+        min-height: 70px;
+        padding: 0 0.75rem;
+    }
+
+    .notif-avatar {
+        width: 38px;
+        height: 38px;
+        font-size: 0.875rem;
+    }
+
+    .notif-text { font-size: 0.8125rem; }
+
+    .follow-back-btn {
+        font-size: 0.7125rem;
+        padding: 0.35rem 0.7rem;
+    }
+
+    .action-btn { width: 100%; justify-content: center; }
+}

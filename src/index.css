@@ -1,0 +1,511 @@
+/* ─── Mobile Touch Interactions Import ─── */
+@import './styles/mobile-touch-interactions.css';
+
+/* ─── Scrollbar Hide ─── */
+html,
+body,
+*,
+*::before,
+*::after {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+/* ─── Custom Cursor ─── */
+.landing-cursor-active,
+.landing-cursor-active * {
+  cursor: none !important;
+}
+
+.dropp-custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(5, 2, 11, 0.42);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 34% 30%, rgba(255, 255, 255, 0.42), transparent 28%),
+    linear-gradient(135deg, rgba(199, 247, 165, 0.18), rgba(240, 5, 122, 0.1));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.26) inset,
+    0 10px 30px rgba(5, 2, 11, 0.12);
+  opacity: 0.74;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition:
+    width 220ms ease,
+    height 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    opacity 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.dropp-custom-cursor::before {
+  position: absolute;
+  inset: 7px;
+  content: '';
+  border: 1px dashed rgba(5, 2, 11, 0.3);
+  border-radius: inherit;
+  animation: dropp-cursor-spin 7s linear infinite;
+}
+
+.dropp-custom-cursor::after {
+  position: absolute;
+  inset: -9px;
+  content: '';
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(240, 5, 122, 0.18), transparent 62%);
+  opacity: 0.7;
+  filter: blur(6px);
+}
+
+.dropp-custom-cursor__spark {
+  position: absolute;
+  top: -5px;
+  right: -3px;
+  z-index: 2;
+  width: 16px;
+  height: 16px;
+  transform: rotate(45deg);
+}
+
+.dropp-custom-cursor__spark::before,
+.dropp-custom-cursor__spark::after {
+  position: absolute;
+  content: '';
+  background: #f24932;
+  box-shadow: 0 0 0 1px rgba(5, 2, 11, 0.85);
+}
+
+.dropp-custom-cursor__spark::before {
+  top: 7px;
+  left: 0;
+  width: 16px;
+  height: 3px;
+}
+
+.dropp-custom-cursor__spark::after {
+  top: 0;
+  left: 7px;
+  width: 3px;
+  height: 16px;
+}
+
+.dropp-custom-cursor.is-hovering {
+  width: 68px;
+  height: 68px;
+  border-color: rgba(240, 5, 122, 0.72);
+  background:
+    radial-gradient(circle at 50% 50%, rgba(240, 5, 122, 0.2), transparent 38%),
+    rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(240, 5, 122, 0.2) inset,
+    0 18px 48px rgba(240, 5, 122, 0.18);
+  opacity: 0.9;
+}
+
+.dropp-custom-cursor.is-clicking {
+  width: 36px;
+  height: 36px;
+  opacity: 0.95;
+}
+
+@keyframes dropp-cursor-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: inherit;
+  text-decoration: inherit;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+#root {
+  width: 100%;
+}
+
+/* ─── Keyframe Animations ─── */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float-bob {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  33% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+
+  66% {
+    transform: translateY(-6px) rotate(-1deg);
+  }
+}
+
+@keyframes float-bob-alt {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  40% {
+    transform: translateY(-18px) rotate(-2deg);
+  }
+
+  70% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
+
+@keyframes float-bob-slow {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(230, 0, 126, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 20px 8px rgba(230, 0, 126, 0.1);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ─── Animation Utility Classes ─── */
+.animate-marquee {
+  animation: marquee-scroll 25s linear infinite;
+}
+
+.animate-float {
+  animation: float-bob 5s ease-in-out infinite;
+}
+
+.animate-float-alt {
+  animation: float-bob-alt 6s ease-in-out 0.5s infinite;
+}
+
+.animate-float-slow {
+  animation: float-bob-slow 7s ease-in-out 1s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* ─── Typography Utilities ─── */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.88;
+}
+
+.font-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+.font-body-medium {
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+.font-body-bold {
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* ─── Nav Button ─── */
+.nav-btn {
+    width: clamp(48px, 10vw, 56px);
+    height: clamp(48px, 10vw, 56px);
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.4s var(--ease-out-expo), box-shadow 0.3s ease;
+    will-change: transform;
+    border: none;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.nav-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 640px) {
+    .nav-btn:active {
+        transform: scale(0.92);
+    }
+}
+
+/* ─── Tag Pill ─── */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: clamp(8px, 1.5vw, 10px) clamp(16px, 3vw, 22px);
+  border-radius: var(--radius-full);
+  font-size: clamp(12px, 2vw, 13px);
+  font-weight: 500;
+  font-family: var(--font-sans);
+  white-space: nowrap;
+  transition: all 0.3s var(--ease-out-expo);
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tag-pill:hover,
+.tag-pill:active {
+  transform: translateY(-2px);
+}
+
+/* ─── Section Label ─── */
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+
+/* ─── CTA Button ─── */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(10px, 2vw, 14px) clamp(20px, 4vw, 32px);
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 2vw, 14px);
+  font-weight: 600;
+  transition: all 0.35s var(--ease-out-expo);
+  cursor: pointer;
+  will-change: transform;
+  border: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.cta-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+@media (max-width: 640px) {
+  .cta-btn {
+    min-height: 44px;
+  }
+
+  .cta-btn:active {
+    transform: translateY(0) scale(0.94);
+  }
+}
+
+/* ─── Accordion ─── */
+.accordion-body {
+  overflow: hidden;
+  transition: max-height 0.6s var(--ease-out-expo), opacity 0.4s ease;
+}
+
+/* ─── Card Styles ─── */
+.project-card {
+  border-radius: clamp(20px, 4vw, 28px);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  transition: transform 0.5s var(--ease-out-expo);
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.project-card:hover,
+.project-card:active {
+  transform: scale(1.02);
+}
+
+.value-card {
+  border-radius: clamp(20px, 4vw, 24px);
+  padding: clamp(20px, 4vw, 36px) clamp(16px, 3vw, 28px);
+  transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s ease;
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.value-card:hover,
+.value-card:active {
+  transform: translateY(-6px) rotate(0deg) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Method Card ─── */
+.method-card {
+  position: sticky;
+  border-radius: 28px;
+  overflow: hidden;
+  will-change: transform;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* ─── Quiz Form ─── */
+.quiz-option {
+  padding: clamp(10px, 2vw, 14px) clamp(18px, 4vw, 28px);
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 2vw, 14px);
+  font-weight: 500;
+  transition: all 0.35s var(--ease-out-expo);
+  cursor: pointer;
+  border: 2px solid;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 44px;
+}
+
+.quiz-option:hover,
+.quiz-option:active {
+  transform: translateY(-2px);
+}
+
+.quiz-input {
+  width: 100%;
+  padding: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 24px);
+  border-radius: var(--radius-full);
+  border: 2px solid #e0dbd5;
+  background: white;
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 2vw, 14px);
+  outline: none;
+  transition: border-color 0.3s ease;
+  min-height: 44px;
+}
+
+.quiz-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(240, 5, 122, 0.1);
+}
+
+@media (max-width: 640px) {
+  .quiz-input {
+    font-size: 16px;
+  }
+}

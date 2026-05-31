@@ -1,0 +1,67 @@
+/* Cards sit on landing paper (#fff8f0). Light cards use multiply so white mats blend away. */
+.audience-arch-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: clamp(16px, 3vw, 28px) 0 clamp(24px, 4vw, 36px);
+  background: transparent;
+  isolation: isolate;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.audience-arch-carousel:active {
+  cursor: grabbing;
+}
+
+.audience-arch-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.5vw, 28px);
+  width: max-content;
+  will-change: transform;
+  padding: 8px 0;
+}
+
+.audience-arch-card {
+  flex-shrink: 0;
+  width: min(503px, 88vw);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.audience-arch-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 503 / 391;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+/* Light cards: white outer mat blends into page cream */
+.audience-arch-card--light img {
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 12px 32px rgba(16, 9, 31, 0.11));
+}
+
+/* Dark cards: keep colors true */
+.audience-arch-card--dark img {
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 14px 36px rgba(16, 9, 31, 0.16));
+}
+
+@media (max-width: 720px) {
+  .audience-arch-track {
+    gap: 16px;
+  }
+
+  .audience-arch-card img {
+    border-radius: 16px;
+  }
+}

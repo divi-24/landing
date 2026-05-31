@@ -1,0 +1,167 @@
+/* Pinterest-Style Masonry Grid (CSS Columns) */
+.pin-masonry {
+    column-count: 5;
+    column-gap: clamp(8px, 2vw, 16px);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.pin-masonry-item {
+    break-inside: avoid;
+    margin-bottom: clamp(8px, 2vw, 16px);
+}
+
+/* Product Board Preview - single image, natural height */
+.pin-masonry-item .board-preview.product-board-preview {
+    grid-template-columns: 1fr;
+    aspect-ratio: 4 / 5;
+}
+
+.pin-masonry-item .product-single-image {
+    grid-row: auto;
+}
+
+.pin-masonry-item .product-single-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* Ensure the pinterest-board card inside masonry has no extra transforms */
+.pin-masonry-item .pinterest-board {
+    transition: transform 0.2s ease;
+}
+
+.pin-masonry-item .pinterest-board:hover,
+.pin-masonry-item .pinterest-board:active {
+    transform: translateY(-2px);
+}
+
+/* Responsive Columns */
+@media (max-width: 1400px) {
+    .pin-masonry {
+        column-count: 4;
+        column-gap: clamp(8px, 2vw, 14px);
+    }
+}
+
+@media (max-width: 1100px) {
+    .pin-masonry {
+        column-count: 3;
+        column-gap: clamp(8px, 2vw, 12px);
+    }
+}
+
+@media (max-width: 768px) {
+    .pin-masonry {
+        column-count: 2;
+        column-gap: clamp(8px, 2vw, 12px);
+    }
+
+    .pin-masonry-item {
+        margin-bottom: clamp(8px, 2vw, 12px);
+    }
+}
+
+@media (max-width: 640px) {
+    .pin-masonry {
+        column-count: 2;
+        column-gap: clamp(6px, 2vw, 8px);
+    }
+
+    .pin-masonry-item {
+        margin-bottom: clamp(6px, 1.5vw, 8px);
+    }
+}
+
+@media (max-width: 480px) {
+    .pin-masonry {
+        column-count: 2;
+        column-gap: 10px;
+    }
+
+    .pin-masonry-item {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .pin-masonry {
+        column-count: 1;
+        column-gap: 0;
+    }
+
+    .pin-masonry-item {
+        margin-bottom: 8px;
+    }
+}
+
+/* Also support pinterest-grid product-pinterest-grid for collection detail pages */
+.product-pinterest-grid {
+    column-count: 4;
+    column-gap: clamp(8px, 2vw, 16px);
+    display: block;
+    grid-template-columns: unset;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.product-pinterest-grid > * {
+    break-inside: avoid;
+    margin-bottom: clamp(8px, 2vw, 16px);
+}
+
+.product-pinterest-grid .board-preview.product-board-preview {
+    grid-template-columns: 1fr;
+    aspect-ratio: auto;
+}
+
+.product-pinterest-grid .product-single-image {
+    grid-row: auto;
+}
+
+.product-pinterest-grid .product-single-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+@media (max-width: 1100px) {
+    .product-pinterest-grid {
+        column-count: 3;
+        column-gap: clamp(8px, 2vw, 12px);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-pinterest-grid {
+        column-count: 2;
+        column-gap: clamp(8px, 2vw, 12px);
+    }
+}
+
+@media (max-width: 640px) {
+    .product-pinterest-grid {
+        column-count: 2;
+        column-gap: clamp(6px, 2vw, 8px);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-pinterest-grid {
+        column-count: 1;
+        column-gap: 0;
+    }
+}
+
+@media (max-width: 320px) {
+    .product-pinterest-grid {
+        column-count: 1;
+        column-gap: 0;
+    }
+}

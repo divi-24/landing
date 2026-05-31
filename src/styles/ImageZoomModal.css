@@ -1,0 +1,63 @@
+/* Image Zoom Modal - Instagram-style zoom */
+.image-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 2rem;
+}
+
+.image-zoom-container {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.image-zoom-close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.image-zoom-close:hover {
+    transform: scale(1.1);
+}
+
+.image-zoom-img {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .image-zoom-overlay {
+        padding: 1rem;
+    }
+
+    .image-zoom-container {
+        max-width: 95vw;
+    }
+
+    .image-zoom-close {
+        top: -2.5rem;
+    }
+
+    .image-zoom-img {
+        max-height: 80vh;
+        border-radius: 4px;
+    }
+}

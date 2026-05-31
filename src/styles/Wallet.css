@@ -1,0 +1,1039 @@
+/* ═══════════════════════════════════════════════════════════
+   Wallet.css — wlp-*
+   Premium fintech aesthetic. Dark + light via CSS variables.
+   8px spacing grid. No hardcoded palette outside the spec.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Keyframes ──────────────────────────────────────────── */
+@keyframes wlp-shimmer-pass {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+}
+
+@keyframes wlp-fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wlp-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes wlp-hero-glow-pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.06); }
+}
+
+/* ── Page shell ─────────────────────────────────────────── */
+.wlp-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    padding: clamp(24px, 4vw, 40px) clamp(16px, 3vw, 32px);
+}
+
+.wlp-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: wlp-fade-up 0.35s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+
+.wlp-inner--wide {
+    max-width: 840px;
+}
+
+/* ── Page header ────────────────────────────────────────── */
+.wlp-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 4px;
+}
+
+.wlp-page-header-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+}
+
+.wlp-page-header-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--color-accent, #F0057A);
+    margin-top: 2px;
+}
+
+.wlp-page-title {
+    margin: 0 0 3px;
+    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.wlp-page-subtitle {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.wlp-header-action,
+.wlp-back-btn {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.16s, color 0.16s, background 0.16s, transform 0.16s;
+}
+
+.wlp-header-action:hover,
+.wlp-back-btn:hover {
+    border-color: var(--color-accent, #F0057A);
+    color: var(--color-accent, #F0057A);
+    background: var(--bg-elevated, var(--bg-secondary));
+    transform: translateY(-1px);
+}
+
+/* ── Balance hero card ──────────────────────────────────── */
+.wlp-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    padding: 28px 28px 24px;
+    box-shadow: var(--shadow-md);
+    transition: box-shadow 0.2s;
+}
+
+.wlp-hero--loading {
+    pointer-events: none;
+}
+
+/* ambient glow blob */
+.wlp-hero__glow {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(240, 5, 122, 0.14), transparent 70%);
+    pointer-events: none;
+    animation: wlp-hero-glow-pulse 4s ease-in-out infinite;
+    z-index: 0;
+}
+
+.wlp-hero__eyebrow {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 12px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+/* shimmer state */
+.wlp-hero__shimmer-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wlp-hero__shimmer {
+    display: block;
+    border-radius: 8px;
+    background: linear-gradient(
+        90deg,
+        var(--bg-elevated, var(--bg-secondary)) 25%,
+        color-mix(in srgb, var(--border-color) 60%, transparent) 50%,
+        var(--bg-elevated, var(--bg-secondary)) 75%
+    );
+    background-size: 200% 100%;
+    animation: wlp-shimmer-pass 1.4s ease-in-out infinite;
+}
+
+.wlp-hero__shimmer--lg { height: 52px; width: 60%; }
+.wlp-hero__shimmer--sm { height: 16px; width: 30%; }
+
+/* balance display */
+.wlp-hero__balance {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.wlp-hero__currency {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--color-accent, #F0057A);
+    line-height: 1;
+}
+
+.wlp-hero__amount {
+    font-size: clamp(2.4rem, 6vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-accent, #F0057A);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.wlp-hero__currency-note {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.02em;
+}
+
+/* error state inside hero */
+.wlp-hero__error {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wlp-hero__error-msg {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.wlp-retry-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-elevated, var(--bg-primary));
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: fit-content;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.wlp-retry-btn:hover {
+    border-color: var(--color-accent, #F0057A);
+    background: var(--bg-secondary);
+}
+
+/* ── Stats row ──────────────────────────────────────────── */
+.wlp-stats-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.wlp-stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-md);
+    transition: box-shadow 0.2s;
+}
+
+.wlp-stat__icon-wrap {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+}
+
+/* amber */
+.wlp-stat__icon-wrap--amber {
+    background: rgba(245, 158, 11, 0.12);
+    color: #F59E0B;
+}
+/* accent / pink */
+.wlp-stat__icon-wrap--accent {
+    background: rgba(240, 5, 122, 0.10);
+    color: var(--color-accent, #F0057A);
+}
+/* violet */
+.wlp-stat__icon-wrap--violet {
+    background: rgba(124, 58, 237, 0.12);
+    color: #7C3AED;
+}
+/* neutral */
+.wlp-stat__icon-wrap--neutral {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text-secondary);
+}
+
+.wlp-stat__body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.wlp-stat__label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wlp-stat__value {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.wlp-stat__value--amber   { color: #F59E0B; }
+.wlp-stat__value--accent  { color: var(--color-accent, #F0057A); }
+.wlp-stat__value--violet  { color: #7C3AED; }
+.wlp-stat__value--neutral { color: var(--text-secondary); }
+
+.wlp-stat__shimmer {
+    display: block;
+    height: 20px;
+    width: 80px;
+    border-radius: 6px;
+    background: linear-gradient(
+        90deg,
+        var(--bg-elevated, var(--bg-secondary)) 25%,
+        color-mix(in srgb, var(--border-color) 60%, transparent) 50%,
+        var(--bg-elevated, var(--bg-secondary)) 75%
+    );
+    background-size: 200% 100%;
+    animation: wlp-shimmer-pass 1.4s ease-in-out infinite;
+}
+
+/* ── Section shell ──────────────────────────────────────── */
+.wlp-section {
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.wlp-section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.wlp-section-title {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+/* ── Deposit form ───────────────────────────────────────── */
+.wlp-deposit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px;
+}
+
+/* Presets */
+.wlp-presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.wlp-preset-btn {
+    padding: 7px 16px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-elevated, var(--bg-primary));
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.wlp-preset-btn:hover {
+    border-color: var(--color-accent, #F0057A);
+    color: var(--color-accent, #F0057A);
+    background: rgba(240, 5, 122, 0.04);
+}
+
+.wlp-preset-btn--active {
+    border-color: var(--color-accent, #F0057A);
+    background: rgba(240, 5, 122, 0.07);
+    color: var(--color-accent, #F0057A);
+    box-shadow: 0 0 0 3px rgba(240, 5, 122, 0.08);
+}
+
+/* Custom input */
+.wlp-deposit-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.wlp-deposit-field__prefix {
+    position: absolute;
+    left: 14px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.wlp-deposit-input {
+    width: 100%;
+    padding: 11px 40px 11px 32px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-elevated, var(--bg-primary));
+    color: var(--text-primary);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    outline: none;
+    appearance: textfield;
+    -moz-appearance: textfield;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    box-sizing: border-box;
+}
+
+.wlp-deposit-input::-webkit-inner-spin-button,
+.wlp-deposit-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.wlp-deposit-input::placeholder { color: var(--text-tertiary); font-weight: 400; }
+
+.wlp-deposit-input:focus {
+    border-color: var(--color-accent, #F0057A);
+    box-shadow: 0 0 0 3px rgba(240, 5, 122, 0.09);
+}
+
+.wlp-deposit-field__clear {
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: var(--border-color);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.12s, color 0.12s;
+}
+
+.wlp-deposit-field__clear:hover {
+    background: rgba(240, 5, 122, 0.12);
+    color: var(--color-accent, #F0057A);
+}
+
+/* hint / error */
+.wlp-deposit-hint {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.wlp-deposit-error {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #EF4444;
+}
+
+/* CTA button */
+.wlp-deposit-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background: var(--bg-elevated, var(--border-color));
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: not-allowed;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.12s;
+    letter-spacing: 0.01em;
+}
+
+.wlp-deposit-cta--ready {
+    background: var(--color-accent, #F0057A);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(240, 5, 122, 0.28);
+}
+
+.wlp-deposit-cta--ready:hover {
+    background: color-mix(in srgb, var(--color-accent, #F0057A) 88%, #000);
+    box-shadow: 0 6px 22px rgba(240, 5, 122, 0.36);
+    transform: translateY(-1px);
+}
+
+.wlp-deposit-cta--ready:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(240, 5, 122, 0.22);
+}
+
+/* Spinner inside button */
+.wlp-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: wlp-spin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
+/* ── Withdraw section (creator) ─────────────────────────── */
+.wlp-coming-soon-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-elevated, var(--bg-primary));
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+.wlp-withdraw-placeholder {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    opacity: 0.55;
+    pointer-events: none;
+    user-select: none;
+}
+
+.wlp-withdraw-placeholder__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.wlp-withdraw-placeholder__label {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.wlp-withdraw-placeholder__value {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.wlp-withdraw-placeholder__divider {
+    height: 1px;
+    background: var(--border-color);
+}
+
+.wlp-withdraw-cta-disabled {
+    margin-top: 12px;
+}
+
+/* ── Creator wallet payout panel ────────────────────────── */
+.wlp-creator-payout-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+    padding: 18px;
+}
+
+.wlp-creator-payout-card {
+    min-width: 0;
+    padding: 18px;
+    border-radius: 14px;
+    background:
+        linear-gradient(135deg, rgba(124, 58, 237, 0.10), rgba(240, 5, 122, 0.08)),
+        var(--bg-elevated, var(--bg-primary));
+    border: 1px solid color-mix(in srgb, var(--border-color) 82%, var(--color-accent, #F0057A));
+}
+
+.wlp-creator-payout-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+}
+
+.wlp-creator-payout-card strong {
+    display: block;
+    font-size: clamp(1.8rem, 5vw, 2.7rem);
+    line-height: 1;
+    font-weight: 850;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+.wlp-creator-payout-card p {
+    max-width: 430px;
+    margin: 10px 0 0;
+    color: var(--text-secondary);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+}
+
+.wlp-creator-actions {
+    width: min(220px, 32vw);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wlp-creator-action {
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-elevated, var(--bg-primary));
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.16s, color 0.16s, background 0.16s, transform 0.16s;
+}
+
+.wlp-creator-action:hover {
+    border-color: var(--color-accent, #F0057A);
+    color: var(--color-accent, #F0057A);
+    transform: translateY(-1px);
+}
+
+.wlp-creator-action--primary {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: var(--bg-primary);
+}
+
+.wlp-creator-action--primary:hover {
+    background: var(--color-accent, #F0057A);
+    border-color: var(--color-accent, #F0057A);
+    color: #fff;
+}
+
+.wlp-creator-action:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    transform: none;
+}
+
+.wlp-creator-flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 18px;
+}
+
+.wlp-creator-flow-step {
+    min-width: 0;
+    padding: 16px;
+    border-radius: 13px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-elevated, var(--bg-primary));
+}
+
+.wlp-creator-flow-step span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 24px;
+    margin-bottom: 12px;
+    border-radius: 999px;
+    background: rgba(240, 5, 122, 0.10);
+    color: var(--color-accent, #F0057A);
+    font-size: 0.6875rem;
+    font-weight: 900;
+}
+
+.wlp-creator-flow-step strong {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    margin-bottom: 5px;
+}
+
+.wlp-creator-flow-step p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    line-height: 1.45;
+}
+
+/* ── Wallet explained legend ────────────────────────────── */
+.wlp-tx-legend {
+    display: flex;
+    flex-direction: column;
+}
+
+.wlp-tx-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.13s;
+}
+
+.wlp-tx-row:last-child {
+    border-bottom: none;
+}
+
+.wlp-tx-row:hover {
+    background: color-mix(in srgb, var(--bg-elevated, var(--bg-primary)) 60%, transparent);
+}
+
+.wlp-tx-icon {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    margin-top: 1px;
+}
+
+/* icon colour variants */
+.wlp-tx-accent  { background: rgba(240, 5, 122, 0.10);  color: var(--color-accent, #F0057A); }
+.wlp-tx-amber   { background: rgba(245, 158, 11, 0.10); color: #F59E0B; }
+.wlp-tx-success { background: rgba(16, 185, 129, 0.10); color: var(--color-success, #10B981); }
+.wlp-tx-violet  { background: rgba(124, 58, 237, 0.10); color: #7C3AED; }
+.wlp-tx-secondary {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text-secondary);
+}
+
+.wlp-tx-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.wlp-tx-label {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.wlp-tx-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* ── Wallet history ─────────────────────────────────────── */
+.wlp-history-panel {
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-md);
+}
+
+.wlp-history-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.wlp-history-search {
+    min-width: 0;
+    flex: 1;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-tertiary);
+    padding: 0 13px;
+}
+
+.wlp-history-search input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 0.875rem;
+}
+
+.wlp-history-count {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-tertiary);
+}
+
+.wlp-history-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.wlp-history-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.wlp-history-row:last-child {
+    border-bottom: 0;
+}
+
+.wlp-history-row__main {
+    min-width: 0;
+    flex: 1;
+}
+
+.wlp-history-row__top,
+.wlp-history-row__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.wlp-history-row__top strong {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.925rem;
+    color: var(--text-primary);
+}
+
+.wlp-history-row__meta {
+    margin-top: 4px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.wlp-history-row__meta span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wlp-history-amount {
+    flex-shrink: 0;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.wlp-history-status {
+    flex-shrink: 0;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.wlp-history-state {
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 32px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.wlp-history-state strong {
+    color: var(--text-primary);
+}
+
+.wlp-history-state p {
+    margin: 0;
+    font-size: 0.8125rem;
+}
+
+/* ── Footer note ────────────────────────────────────────── */
+.wlp-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 4px 0 8px;
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.03em;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .wlp-page {
+        padding: 20px 14px;
+    }
+
+    .wlp-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .wlp-stat {
+        padding: 13px;
+        gap: 10px;
+    }
+
+    .wlp-stat__icon-wrap {
+        width: 30px;
+        height: 30px;
+    }
+
+    .wlp-hero {
+        padding: 22px 18px 18px;
+    }
+
+    .wlp-section-header,
+    .wlp-deposit-form,
+    .wlp-withdraw-placeholder {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .wlp-creator-payout-body,
+    .wlp-creator-flow {
+        grid-template-columns: 1fr;
+        padding: 14px;
+    }
+
+    .wlp-creator-actions {
+        width: 100%;
+    }
+
+    .wlp-tx-row {
+        padding: 12px 14px;
+    }
+
+    .wlp-history-toolbar,
+    .wlp-history-row,
+    .wlp-history-row__top,
+    .wlp-history-row__meta {
+        align-items: flex-start;
+    }
+
+    .wlp-history-toolbar,
+    .wlp-history-row__top,
+    .wlp-history-row__meta {
+        flex-direction: column;
+    }
+
+    .wlp-history-count,
+    .wlp-history-status {
+        align-self: flex-start;
+    }
+
+    .wlp-history-search {
+        width: 100%;
+    }
+
+    .wlp-presets {
+        gap: 6px;
+    }
+
+    .wlp-preset-btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .wlp-stats-row {
+        grid-template-columns: 1fr;
+    }
+}

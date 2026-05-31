@@ -1,0 +1,493 @@
+/* Edit Profile Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Slightly less opaque than before to allow some context */
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn var(--transition-medium) forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-xl);
+    width: 90%;
+    max-width: 650px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: var(--glass-shadow), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-color);
+    animation: slideUp var(--transition-medium) forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-primary);
+    z-index: 10;
+}
+
+.modal-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    font-family: var(--font-display);
+}
+
+.close-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.close-btn:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 32px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.media-kit-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.media-kit-input-group svg {
+    position: absolute;
+    left: 12px;
+    color: var(--text-tertiary, #777);
+    z-index: 1;
+}
+
+.media-kit-input-group .form-input {
+    padding-left: 38px;
+}
+
+.media-kit-upload-btn {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    border: 1px solid var(--border-color, #333);
+    border-radius: 10px;
+    padding: 8px 12px;
+    color: var(--text-secondary, #aaa);
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: var(--bg-tertiary, transparent);
+}
+
+.media-kit-upload-btn input {
+    display: none;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    transition: all var(--transition-fast);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background-color: var(--bg-primary);
+    box-shadow: 0 0 0 2px var(--glass-border);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+}
+
+.profile-image-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+    padding: 24px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--border-color);
+}
+
+.image-preview-container {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: relative;
+    border: 4px solid var(--bg-primary);
+    box-shadow: 0 0 0 1px var(--border-color);
+    background-color: var(--bg-secondary);
+}
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.change-photo-btn {
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    transition: all var(--transition-fast);
+}
+
+.change-photo-btn:hover {
+    background-color: var(--bg-secondary);
+    border-color: var(--text-primary);
+}
+
+.change-photo-input {
+    display: none;
+}
+
+.form-actions {
+    padding: 24px 32px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    position: sticky;
+    bottom: 0;
+    background-color: var(--bg-primary);
+    z-index: 10;
+}
+
+.cancel-btn {
+    padding: 12px 24px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+}
+
+.cancel-btn:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+.save-btn {
+    padding: 12px 32px;
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--accent-gradient);
+    /* Use theme gradient */
+    color: #fff !important;
+    /* Always white on gradient */
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* In dark mode, ensure text is readable on white gradient */
+[data-theme='dark'] .save-btn {
+    color: #fff;
+}
+
+/* Handle system dark preference if not manually toggled */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .save-btn {
+        color: #fff;
+    }
+}
+
+.save-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+    filter: grayscale(1);
+}
+
+.save-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.location-input-container {
+    position: relative;
+}
+
+.location-suggestions {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-top: 0;
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: var(--glass-shadow);
+}
+
+.location-suggestion {
+    padding: 14px 16px;
+    cursor: pointer;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    transition: background-color var(--transition-fast);
+    display: flex;
+    align-items: center;
+}
+
+.location-suggestion:last-child {
+    border-bottom: none;
+}
+
+.location-suggestion:hover {
+    background-color: var(--bg-secondary);
+}
+
+.input-helper-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    margin-left: 4px;
+}
+
+.input-warning-text {
+    font-size: 0.85rem;
+    color: #ef4444;
+    /* Standard error red works well on both */
+    margin-top: 8px;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(239, 68, 68, 0.1);
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+}
+
+/* Custom scrollbar for modal content */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .modal-content {
+        width: 95%;
+        max-width: 100%;
+        max-height: 95vh;
+        border-radius: var(--radius-lg);
+    }
+
+    .modal-header {
+        padding: 16px 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.375rem;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .profile-image-upload {
+        padding: 16px;
+        margin-bottom: 24px;
+    }
+
+    .image-preview-container {
+        width: 110px;
+        height: 110px;
+    }
+
+    .form-actions {
+        padding: 16px 20px;
+        flex-direction: column-reverse;
+    }
+
+    .cancel-btn,
+    .save-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        display: flex;
+        min-height: 44px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+        font-size: 16px; /* Prevent iOS zoom */
+        padding: 12px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+        height: 100vh;
+    }
+
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .image-preview-container {
+        width: 96px;
+        height: 96px;
+    }
+}
+
+/* Password Strength Styles */
+/* Modern Password Strength Styles - Modal Version */
+.password-strength-container {
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.strength-bar-container {
+    display: flex;
+    gap: 4px;
+    height: 4px;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.strength-bar-segment {
+    flex: 1;
+    background-color: var(--border-color);
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+.strength-bar-segment.filled {
+    background-color: #16a34a;
+    /* Green */
+    box-shadow: 0 0 8px rgba(22, 163, 74, 0.4);
+}
+
+.strength-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.strength-pill {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.05);
+    /* Match Auth.css logic */
+    color: var(--text-secondary);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.strength-pill.met {
+    background-color: rgba(22, 163, 74, 0.1);
+    color: #16a34a;
+    border-color: rgba(22, 163, 74, 0.2);
+}
